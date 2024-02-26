@@ -1,0 +1,46 @@
+---
+import Layout from "./Default.astro";
+import InternalLink from "@components/InternalLink.astro";
+const { frontmatter } = Astro.props;
+const title = frontmatter.title;
+const subtitle = frontmatter.subtitle;
+---
+
+<Layout title={title}>
+  <main>
+    <header>
+      <div class="secondary-color">
+        <InternalLink title="Accueil" text="< Accueil" href="/" />
+      </div>
+      <h1>{title}</h1>
+      {subtitle && <p class="secondary-color">{subtitle}</p>}
+    </header>
+    <slot />
+  </main>
+</Layout>
+
+<style is:global>
+  main header {
+    margin-top: 30%;
+    margin-bottom: 5em;
+  }
+  main h1 {
+    font-size: 24px;
+    padding: 5px;
+    margin: 0 0 0.5em 0;
+    line-height: 1;
+    max-width: max-content;
+  }
+  main h2 {
+    padding-top: 1em;
+  }
+  main h3 {
+    padding-top: 0.5em;
+  }
+  main p {
+    margin: 0;
+  }
+  main div {
+    margin-bottom: 1em;
+  }
+</style>

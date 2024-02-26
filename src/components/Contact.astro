@@ -1,0 +1,47 @@
+---
+import ExternalLink from "@components/ExternalLink.astro";
+
+interface Props {
+  name: string;
+  username: string;
+  url: string;
+  title: string;
+}
+
+const { name, username, url, title } = Astro.props;
+---
+
+<section>
+  <span class="secondary-color">{name}</span>
+  <h3><ExternalLink href={url} text={username} title={title} /></h3>
+</section>
+
+<style>
+  * {
+    margin: 0;
+  }
+
+  section {
+    display: flex;
+    gap: 10px;
+  }
+
+  span:after {
+    content: " : ";
+  }
+
+  @media (min-width: 450px) {
+    section {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+    }
+
+    span {
+      grid-column-start: 1;
+    }
+
+    span:after {
+      content: initial;
+    }
+  }
+</style>

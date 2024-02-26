@@ -1,0 +1,27 @@
+{
+  "name": "hex46-fr",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "test:ui": "npm run build ; npx playwright test --ui",
+    "test": "npm run build ; npx playwright test",
+    "test:report": "npm run build ; npx playwright test ; npx playwright show-report"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.5.4",
+    "astro": "^4.4.0",
+    "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.41.2",
+    "@types/node": "^20.11.20",
+    "prettier": "^3.2.4",
+    "prettier-plugin-astro": "^0.13.0",
+    "rehype-external-links": "^3.0.0"
+  }
+}

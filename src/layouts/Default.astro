@@ -1,0 +1,58 @@
+---
+import Footer from "@components/Footer.astro";
+import "@styles/theme.css";
+import me from "@assets/favicon.svg";
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Site vitrine de Florent A. aka hex46" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href={me.src} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+  </body>
+  <Footer />
+</html>
+<style is:global>
+  body {
+    margin: auto;
+    padding: 1rem;
+    width: 550px;
+    max-width: calc(100% - 2rem);
+    font-family: Inter, monospace;
+    font-size: 15px;
+    font-style: normal;
+    line-height: 25px;
+    font-weight: normal;
+  }
+  article {
+    margin-bottom: 5em;
+  }
+  a {
+    color: inherit;
+    text-underline-offset: 0.35rem;
+  }
+
+  a[href^="http"]:after {
+    background-image: url("/src/assets/externalLink.svg");
+    background-size: cover;
+    content: "";
+    display: inline-block;
+    height: 1em;
+    margin-left: 0.1em;
+    vertical-align: sub;
+    width: 1em;
+  }
+</style>

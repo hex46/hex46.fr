@@ -1,0 +1,41 @@
+---
+interface Props {
+  name: string;
+}
+
+const { name } = Astro.props;
+---
+
+<header>
+  <slot name="photo" />
+  <div>
+    <h1>{name}</h1>
+    <p class="secondary-color"><slot /></p>
+  </div>
+</header>
+
+<style>
+  header {
+    display: flex;
+    margin-top: 30%;
+    margin-bottom: 5em;
+    gap: 40px;
+    align-items: center;
+  }
+
+  header > div {
+    display: flex;
+    flex-direction: column;
+  }
+
+  h1 {
+    font-size: 24px;
+    padding: 5px;
+    margin: 0 0 0.5em 0;
+    line-height: 1;
+  }
+
+  p {
+    margin: 0;
+  }
+</style>

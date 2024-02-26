@@ -1,0 +1,61 @@
+---
+interface Props {
+  time: string;
+  datetime: string;
+  tags?: string[];
+}
+
+const { time, datetime } = Astro.props;
+---
+
+<section>
+  <h3><slot name="title" /></h3>
+  <time datetime={datetime} class="secondary-color">{time}</time>
+  <p slot="description">
+    <slot name="description" />
+  </p>
+  <div>
+    <slot name="tags" />
+  </div>
+</section>
+
+<style>
+  * {
+    margin: 0;
+  }
+
+  section {
+    padding-top: 1em;
+    display: grid;
+    grid-template-columns: initial;
+    grid-template-rows: initial;
+    gap: 10px;
+  }
+
+  @media (min-width: 450px) {
+    section {
+      padding-top: initial;
+      display: grid;
+      grid-template-columns: 1fr 300px;
+    }
+
+    h3 {
+      grid-column-start: 2;
+    }
+
+    time {
+      grid-row-start: 1;
+      grid-column-start: 1;
+    }
+
+    p {
+      grid-column-start: 2;
+      grid-row-start: 2;
+    }
+
+    div {
+      grid-column-start: 2;
+      grid-row-start: 3;
+    }
+  }
+</style>

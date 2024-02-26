@@ -1,0 +1,30 @@
+---
+import ExternalLink from "./ExternalLink.astro";
+import InternalLink from "./InternalLink.astro";
+---
+
+<footer class="secondary-color">
+  <div>
+    Sauf mention contraire, le contenu de ce site est publié sous licence
+    <ExternalLink
+      title="License CC BY-SA 4.0."
+      text="CC BY-SA 4.0."
+      href="https://www.creativecommons.org/licenses/by-sa/4.0/deed.fr"
+    />
+  </div>
+  <InternalLink
+    title="Crédits & mentions légales"
+    text="Crédits & mentions légales"
+    href="/credits-et-mentions-legales"
+  />
+</footer>
+
+<style>
+  footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    padding-top: 10%;
+  }
+</style>

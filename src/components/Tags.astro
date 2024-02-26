@@ -1,0 +1,33 @@
+---
+interface Props {
+  elements: string[];
+}
+
+const { elements } = Astro.props;
+---
+
+<ul title="Compétences" class="secondary-color">
+  {elements.map((text) => <li>{text}</li>)}
+</ul>
+
+<style>
+  ul {
+    display: flex;
+    padding: 0;
+    margin: 0;
+    gap: 10px;
+    list-style-type: none;
+  }
+
+  li {
+    display: inline;
+  }
+
+  li:after {
+    content: " - ";
+  }
+
+  ul li:last-child:after {
+    content: "";
+  }
+</style>

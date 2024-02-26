@@ -1,0 +1,13 @@
+---
+import Link from "./Link.astro";
+interface Props {
+  title: string;
+  href: string;
+  text: string
+}
+
+const { title, href , text} = Astro.props;
+
+---
+
+<Link href={href} title={title} text={text} />
