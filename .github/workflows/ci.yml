@@ -17,5 +17,16 @@ jobs:
         run: npx playwright install --with-deps
       - name: ✅ Run Playwright tests
         run: npx playwright test
+      - name: 🔧 Add ssh configuration
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+        run: |
+          ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+          ssh-add - <<< "${{ secrets.CI_SERVER_KEY }}"
       - name: 🚀 Deploy
-        run: echo "🚀 All done!"
+        env:
+          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+          BUILD_DIR: ./dist
+        run: |
+          rsync --recursive --delete --compress --verbose --human-readable --progress --rsh 'ssh -oPort=${{ secrets.CI_SERVER_PORT }}' ${{ env.BUILD_DIR }} ${{ secrets.CI_SERVER_USR }}@${{ secrets.CI_SERVER_ADDRESS }}:${{ secrets.CI_SERVER_PATH }}
+          echo "🚀 All done!"
