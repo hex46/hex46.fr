@@ -16,3 +16,9 @@ body {
 a:hover {
   color: var(--primary-color);
 }
+
+h1 {
+  color: var(--background-color);
+  background-color: var(--primary-color);
+
+}
