@@ -2,7 +2,7 @@ name: 🚀 Build, test & deploy
 on: workflow_dispatch
 jobs:
   job:
-    name: 🏗️ Build and 🚀 Deploy
+    name: 🚀 Build, test & deploy
     timeout-minutes: 10
     runs-on: ubuntu-latest
     env:
@@ -32,6 +32,12 @@ jobs:
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
           BUILD_DIR: ./dist
+          SSH_ARGS: -oPort=${{ secrets.CI_SERVER_PORT }} -o StrictHostKeyChecking=no
+          SERVER_DEST: ${{ secrets.CI_SERVER_USR }}@${{ secrets.CI_SERVER_ADDRESS }}:${{ secrets.CI_SERVER_PATH }}
+          ARGS: -rzvh --progress --delete
         run: |
-          rsync --recursive --delete --compress --verbose --human-readable --progress --rsh 'ssh -oPort=${{ secrets.CI_SERVER_PORT }} -o StrictHostKeyChecking=no' --exclude="${{ env.DEPLOY_KEY }}" ${{ env.BUILD_DIR }} ${{ secrets.CI_SERVER_USR }}@${{ secrets.CI_SERVER_ADDRESS }}:${{ secrets.CI_SERVER_PATH }}
+          rsync ${{ env.ARGS }} \
+            -e 'ssh ${{ env.SSH_ARGS }}' \
+            --exclude="${{ env.DEPLOY_KEY }}" \
+            ${{ env.BUILD_DIR }} ${{ env.SERVER_DEST }}
           echo "🚀 All done!"
