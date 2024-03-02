@@ -22,7 +22,7 @@ Les sources du site sont disponibles sur [GitHub](https://github.com/hex46/hex46
 
 ### L'hébergeur
 
-[hex46.fr](/) est hébergé sur un serveur de [PulseHeberg](https://pulseheberg.com/).
+[hex46.fr](/) est hébergé sur un serveur de [PlanetHoster](https://www.planethoster.com/fr/).
 
 ### Les cookies
 
