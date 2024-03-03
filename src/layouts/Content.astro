@@ -1,6 +1,5 @@
 ---
 import Layout from "./Default.astro";
-import InternalLink from "@components/InternalLink.astro";
 const { frontmatter } = Astro.props;
 const title = frontmatter.title;
 const subtitle = frontmatter.subtitle;
@@ -10,7 +9,7 @@ const subtitle = frontmatter.subtitle;
   <main>
     <header>
       <div class="secondary-color">
-        <InternalLink title="Accueil" text="< Accueil" href="/" />
+        <a title="Accueil" href="/">&#60; Accueil</a>
       </div>
       <h1>{title}</h1>
       {subtitle && <p class="secondary-color">{subtitle}</p>}

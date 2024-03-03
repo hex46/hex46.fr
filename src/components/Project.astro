@@ -1,22 +1,32 @@
 ---
+import type { CollectionEntry } from 'astro:content';
+import Tags from "./Tags.astro";
+
 interface Props {
-  time: string;
-  datetime: string;
-  tags?: string[];
+  project: CollectionEntry<'projects'>;
 }
 
-const { time, datetime } = Astro.props;
+const { project } = Astro.props;
+const { Content } = await project.render();
+
+const {title, datetime, time, tags, organisation, organisationUrl } = project.data
+
 ---
 
-<section>
-  <h3><slot name="title" /></h3>
+<section class="project">
+  <h3 class={datetime === "soon" ? "secondary-color" : undefined }>
+    {title}
+    {organisation &&
+        (organisationUrl &&
+            <> -
+              <a href={organisationUrl} title={organisation} target="_blank" rel="noreferrer external">{organisation}</a>
+            </>
+        )
+    }
+  </h3>
   <time datetime={datetime} class="secondary-color">{time}</time>
-  <p slot="description">
-    <slot name="description" />
-  </p>
-  <div>
-    <slot name="tags" />
-  </div>
+  <Content />
+  <Tags slot="tags" elements={tags} />
 </section>
 
 <style>
@@ -32,11 +42,16 @@ const { time, datetime } = Astro.props;
     gap: 10px;
   }
 
+  a {
+    display: inline-block;
+    white-space: nowrap;
+  }
+
   @media (min-width: 450px) {
     section {
       padding-top: initial;
       display: grid;
-      grid-template-columns: 1fr 300px;
+      grid-template-columns: 1fr 320px;
     }
 
     h3 {
@@ -48,14 +63,23 @@ const { time, datetime } = Astro.props;
       grid-column-start: 1;
     }
 
-    p {
-      grid-column-start: 2;
-      grid-row-start: 2;
-    }
-
     div {
       grid-column-start: 2;
       grid-row-start: 3;
     }
+  }
+</style>
+
+<style is:global>
+  @media (min-width: 450px) {
+    section.project p {
+      grid-column-start: 2;
+      grid-row-start: 2;
+    }
+  }
+
+  section.project p {
+    margin: 0;
+    padding: 0;
   }
 </style>

@@ -1,16 +1,20 @@
 ---
+import type { CollectionEntry } from 'astro:content';
+import { Image } from "astro:assets";
+import me from "/src/assets/me.png";
 interface Props {
-  name: string;
+  meContent: CollectionEntry<'me'>;
 }
 
-const { name } = Astro.props;
+const { meContent } = Astro.props;
+const { Content } = await meContent.render();
 ---
 
 <header>
-  <slot name="photo" />
+  <Image slot="photo" src={me} alt={meContent.data.altImage} />
   <div>
-    <h1>{name}</h1>
-    <p class="secondary-color"><slot /></p>
+    <h1>{meContent.data.title}</h1>
+    <Content/>
   </div>
 </header>
 
@@ -35,7 +39,12 @@ const { name } = Astro.props;
     line-height: 1;
   }
 
-  p {
+</style>
+
+
+<style is:global>
+  header p {
     margin: 0;
+    color: #84848c;
   }
 </style>

@@ -1,14 +1,17 @@
 ---
+import type { CollectionEntry } from 'astro:content';
 interface Props {
-  title: string;
+  aboutContent: CollectionEntry<'about'>;
 }
 
-const { title } = Astro.props;
+const { aboutContent } = Astro.props;
+
+const { Content } = await aboutContent.render();
 ---
 
 <article>
-  <h2>{title}</h2>
+  <h2>{aboutContent.data.title}</h2>
   <p>
-    <slot />
+    <Content />
   </p>
 </article>

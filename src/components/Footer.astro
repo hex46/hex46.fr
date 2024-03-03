@@ -1,22 +1,12 @@
 ---
-import ExternalLink from "./ExternalLink.astro";
-import InternalLink from "./InternalLink.astro";
+import {getEntry} from "astro:content";
+const license = await getEntry('license', 'license');
+const { Content } = await license.render();
 ---
 
 <footer class="secondary-color">
-  <div>
-    Sauf mention contraire, le contenu de ce site est publié sous licence
-    <ExternalLink
-      title="License CC BY-SA 4.0."
-      text="CC BY-SA 4.0."
-      href="https://www.creativecommons.org/licenses/by-sa/4.0/deed.fr"
-    />
-  </div>
-  <InternalLink
-    title="Crédits & mentions légales"
-    text="Crédits & mentions légales"
-    href="/credits-et-mentions-legales"
-  />
+  <Content />
+  <a href="/credits" title="Crédits & mentions légales">Crédits & mentions légales</a>
 </footer>
 
 <style>

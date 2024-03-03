@@ -1,19 +1,18 @@
 ---
-import ExternalLink from "@components/ExternalLink.astro";
-
+import type { CollectionEntry } from 'astro:content';
 interface Props {
-  name: string;
-  username: string;
-  url: string;
-  title: string;
+  social: CollectionEntry<'socials'>;
 }
 
-const { name, username, url, title } = Astro.props;
+const { social } = Astro.props;
+
+const { title, name, url  } = social.data
+
 ---
 
 <section>
-  <span class="secondary-color">{name}</span>
-  <h3><ExternalLink href={url} text={username} title={title} /></h3>
+  <span class="secondary-color">{title}</span>
+  <h3> <a title={name} href={url} target="_blank" rel="noreferrer external">{name}</a></h3>
 </section>
 
 <style>

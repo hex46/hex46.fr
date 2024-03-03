@@ -1,14 +1,15 @@
 ---
 interface Props {
-  elements: string[];
+  elements?: string[];
 }
 
 const { elements } = Astro.props;
 ---
 
-<ul title="Compétences" class="secondary-color">
+{elements && <ul title="Compétences" class="secondary-color">
   {elements.map((text) => <li>{text}</li>)}
-</ul>
+</ul>}
+
 
 <style>
   ul {
@@ -29,5 +30,12 @@ const { elements } = Astro.props;
 
   ul li:last-child:after {
     content: "";
+  }
+
+  @media (min-width: 450px) {
+    ul {
+      grid-column-start: 2;
+      grid-row-start: 3;
+    }
   }
 </style>

@@ -4,101 +4,35 @@ import Me from "@components/Me.astro";
 import About from "@components/About.astro";
 import List from "@components/List.astro";
 import Project from "@components/Project.astro";
-import { Image } from "astro:assets";
-import me from "/src/assets/me.png";
-import ExternalLink from "@components/ExternalLink.astro";
-import Tags from "@components/Tags.astro";
-import Contact from "@components/Contact.astro";
+import {getCollection, getEntry} from 'astro:content';
+import Social from "../components/Social.astro";
+const aboutElements = await getCollection('about');
+const meContent = await getEntry('me', 'me')
+const projects = await getCollection('projects');
+const experiences = await getCollection('experiences');
+const socials = await getCollection('socials');
 
-import contactLinks from "@data/contactLinks";
+const sortedExperiences = experiences.sort(
+    (n1, n2) =>  {
+      if (n1.data.datetime < n2.data.datetime ) return 1;
+      if (n1.data.datetime > n2.data.datetime) return -1;
+      return 0;
+    })
 ---
 
 <Layout title="Florent A.">
   <main>
-    <Me name="Florent A.">
-      Développeur
-      <ExternalLink
-        text="craft"
-        title="Lien Wikipedia vers l'artisanat du logiciel"
-        href="https://fr.wikipedia.org/wiki/Software_craftsmanship"
-      />
-      <Image
-        slot="photo"
-        src={me}
-        alt="Une photo de moi modifiée afin de garder une forme d'anonymat."
-      />
-    </Me>
-    <About title="A propos">
-      Bonjour, je suis Florent A. aka <i>hex46</i> sur la toile. Un petit développeur
-      craft ayant des appétences pour l'univers de la JVM et de JavaScript (entre
-      autres 😉). Il m'arrive aussi de tester des souris et claviers étranges, de
-      parler de craft, de minimalisme et d’écoconception.
-    </About>
+    <Me meContent={meContent} />
+    { aboutElements.map((aboutContent) => <About aboutContent={aboutContent} />) }
     <List title="Mes projets">
-      <Project time="en cours" datetime="now">
-        <Fragment slot="title"
-          ><i class="secondary-color">Arrive bientôt</i></Fragment
-        >
-        <Fragment slot="description">
-          Blog où je partage mes réflexions sur l’univers de la tech.
-        </Fragment>
-      </Project>
+      { projects.map((project) => <Project project={project}/> )}
     </List>
     <List title="Mes expériences">
-      <Project time="mai 2022 - maintenant" datetime="2022-05">
-        <Fragment slot="title">
-          Développeur craft -
-          <ExternalLink
-            href="https://shodo.io/"
-            title="Shodo Nantes"
-            text="Shodo Nantes"
-          /> (en mission)
-        </Fragment>
-        <Fragment slot="description"
-          >Création & maintenance d’un microfrontend basé sur des API.</Fragment
-        >
-        <Tags slot="tags" elements={["Spring", "React", "K8s", "API"]} />
-      </Project>
-      <Project time="déc. 2016 - avr. 2022" datetime="2016-12">
-        <Fragment slot="title"
-          >Développeur - <ExternalLink
-            title="Réseau Canopé"
-            href="https://www.reseau-canope.fr/"
-            text="Réseau Canopé"
-          /></Fragment
-        >
-        <Fragment slot="description"
-          >Maintenance d’applications internes & développements de rapport BI.</Fragment
-        >
-        <Tags slot="tags" elements={["Spring", "Solr", "Power BI", "SSO"]} />
-      </Project>
-      <Project time="nov. 2015 - oct. 2016" datetime="2015-11">
-        <Fragment slot="title"
-          >Ingénieur en dév. - <ExternalLink
-            href="https://www.soprasteria.com/fr/accueil"
-            text="Sopra Steria"
-            title="Sopra Steria"
-          /></Fragment
-        >
-        <Fragment slot="description"
-          >Développement d’une application de datavisualisation.</Fragment
-        >
-        <Tags slot="tags" elements={["Spring", "Angular", "D3.js"]} />
-      </Project>
+      { sortedExperiences.map((exp) => <Project project={exp}/> )}
     </List>
     <List title="Me trouver">
-      {
-        contactLinks.map((contact) => (
-          <Contact
-            name={contact.name}
-            username={contact.username}
-            title={contact.title}
-            url={contact.url}
-          />
-        ))
-      }
+      { socials.map((social) => <Social social={social}/> )}
     </List>
-
     <style>
       p {
         font-style: normal;
