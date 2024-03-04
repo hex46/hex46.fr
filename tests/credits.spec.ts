@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("http://localhost:4321/credits-et-mentions-legales");
+  await page.goto("http://localhost:4321/credits");
 });
 
 test.describe("credits-et-mentions-legales", () => {
