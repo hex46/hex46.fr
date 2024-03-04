@@ -6,7 +6,7 @@ jobs:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     env:
-      DEPLOY_KEY: './deploy_key'
+      DEPLOY_KEY: "./deploy_key"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

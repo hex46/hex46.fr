@@ -14,7 +14,7 @@ test.describe("404", () => {
   test.describe("content", () => {
     test("h1 is correct", async ({ page }) => {
       await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-          "Page introuvable",
+        "Page introuvable",
       );
     });
   });

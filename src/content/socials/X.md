@@ -1,5 +1,5 @@
 ---
 title: X
-name: '@hex46_'
+name: "@hex46_"
 url: https://twitter.com/hex46_
 ---
