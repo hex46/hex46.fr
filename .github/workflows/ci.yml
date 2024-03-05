@@ -31,7 +31,7 @@ jobs:
       - name: 🚀 Deploy
         env:
           SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-          BUILD_DIR: ./dist
+          BUILD_DIR: ./dist/
           SSH_ARGS: -oPort=${{ secrets.CI_SERVER_PORT }} -o StrictHostKeyChecking=no
           SERVER_DEST: ${{ secrets.CI_SERVER_USR }}@${{ secrets.CI_SERVER_ADDRESS }}:${{ secrets.CI_SERVER_PATH }}
           ARGS: -rzvh --progress --delete
