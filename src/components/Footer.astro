@@ -1,12 +1,14 @@
 ---
+import { useTranslations } from '@i18n/utils';
 import {getEntry} from "astro:content";
 const license = await getEntry('license', 'license');
 const { Content } = await license.render();
+const t = useTranslations();
 ---
 
 <footer class="secondary-color">
   <Content />
-  <a href="/credits" title="Crédits & mentions légales">Crédits & mentions légales</a>
+  <a href="/credits" title={t('nav.credits')}>{t('nav.credits')}</a>
 </footer>
 
 <style>

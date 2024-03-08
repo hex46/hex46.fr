@@ -1,15 +1,17 @@
 ---
 import Layout from "./Default.astro";
+import { useTranslations } from '@i18n/utils';
 const { frontmatter } = Astro.props;
 const title = frontmatter.title;
 const subtitle = frontmatter.subtitle;
+const t = useTranslations();
 ---
 
 <Layout title={title}>
   <main>
     <header>
       <div class="secondary-color">
-        <a title="Accueil" href="/">&#60; Accueil</a>
+        <a title={t('nav.home')} href="/">&#60; {t('nav.home')}</a>
       </div>
       <h1>{title}</h1>
       {subtitle && <p class="secondary-color">{subtitle}</p>}

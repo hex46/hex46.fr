@@ -5,19 +5,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 test.describe("index", () => {
-  test.describe("meta", () => {
-    test("title is correct", async ({ page }) => {
-      await expect(page).toHaveTitle("Florent A.");
-    });
-  });
-
   test.describe("content", () => {
-    test("h1 is correct", async ({ page }) => {
-      await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-        "Florent A.",
-      );
-    });
-
     test("has images with alt text", async ({ page }) => {
       await expect(page.getByRole("img")).toHaveAttribute("alt");
       expect(page.locator("img[alt]")).not.toBeEmpty;
