@@ -1,8 +1,8 @@
 ---
 title: Développeur craft (en mission)
 datetime: 2022-05
-time: mai 2022 - maintenant
-tags: ["Spring", "React", "K8s", "API"]
+time: mai 2022 — maintenant
+tags: ["Spring", "React", "K8s", "Clean archi"]
 organisation: Shodo Nantes
 organisationUrl: https://shodo.io/
 ---

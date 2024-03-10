@@ -18,7 +18,7 @@ const {title, datetime, time, tags, organisation, organisationUrl } = project.da
     {title}
     {organisation &&
         (organisationUrl &&
-            <> -
+            <> —
               <a href={organisationUrl} title={organisation} target="_blank" rel="noreferrer external">{organisation}</a>
             </>
         )
@@ -40,6 +40,10 @@ const {title, datetime, time, tags, organisation, organisationUrl } = project.da
     grid-template-columns: initial;
     grid-template-rows: initial;
     gap: 10px;
+  }
+
+  h3:before, h3::after {
+    content: "";
   }
 
   @media (min-width: 450px) {
