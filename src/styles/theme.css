@@ -18,7 +18,11 @@ body {
 }
 
 a:hover {
-  color: var(--primary-color);
+  color: #81a1c1;
+}
+
+a {
+  transition: 0.3s;
 }
 
 h1 {
